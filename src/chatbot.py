@@ -36,24 +36,6 @@ def get_account() -> int:
     
     return account_number
 
-def user_selection() -> str:
-    """
-    Prompts the user to select an action and returns the selected action.
-    
-    Returns:
-        str: The selected action (either 'balance', 'deposit', or 'exit').
-        
-    Raises:
-        ValueError: When the user enters an invalid action.
-    """
-    valid_actions = {"balance", "deposit", "exit"}
-    
-    while True:
-        action = input("Please select an action (balance, deposit, exit): ").lower()
-        if action in valid_actions:
-            return action
-        else:
-            print("Invalid action. Please try again.")
 def get_amount() -> float:
     """
     Prompts the user for the amount to deposit and returns it as a float.
@@ -118,6 +100,24 @@ def make_deposit(account: int, amount: float) -> str:
     
     # Return deposit message
     return f"You have made a deposit of ${amount:.2f} to account {account}."
+def user_selection() -> str:
+    """
+    Prompt the user to select an action and return the selected action.
+
+    Returns:
+        str: The selected action (either 'balance', 'deposit', or 'exit').
+
+    Raises:
+        ValueError: When the user enters an invalid action.
+    """
+    valid_actions = {"balance", "deposit", "exit"}
+    
+    while True:
+        action = input("What would you like to do (balance/deposit/exit)? ").lower()
+        if action in valid_actions:
+            return action
+        else:
+            raise ValueError("Invalid task. Please choose balance, deposit, or exit.")
 
 
 def chatbot():

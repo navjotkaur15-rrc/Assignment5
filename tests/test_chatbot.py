@@ -107,6 +107,32 @@ class ChatbotTests(unittest.TestCase):
         # Act and Assert
         with self.assertRaises(ValueError) as context:
             make_deposit(account_number, deposit_amount)
-        self.assertEqual(str(context.exception), "Invalid Amount. Amount must be positive.")           
+        self.assertEqual(str(context.exception), "Invalid Amount. Amount must be positive.") 
+        def test_user_selection_lowercase(self):
+        # Arrange
+        with patch("builtins.input", return_value="balance"):
+            # Act
+            selection = user_selection()
+        
+        # Assert
+        self.assertEqual(selection, "balance")
+
+    def test_user_selection_uppercase(self):
+        # Arrange
+        with patch("builtins.input", return_value="DEPOSIT"):
+            # Act
+            selection = user_selection()
+        
+        # Assert
+        self.assertEqual(selection, "deposit")
+
+    def test_user_selection_invalid(self):
+        # Arrange
+        with patch("builtins.input", return_value="invalid_selection"):
+            # Act and Assert
+            with self.assertRaises(ValueError) as context:
+                user_selection()
+            self.assertEqual(str(context.exception), "Invalid task. Please choose balance, deposit, or exit.")
+              
 if __name__ == '__main__':
     unittest.main()
