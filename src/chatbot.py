@@ -54,6 +54,25 @@ def user_selection() -> str:
             return action
         else:
             print("Invalid action. Please try again.")
+def get_amount() -> float:
+    """
+    Prompts the user for the amount to deposit and returns it as a float.
+
+    Returns:
+        float: The user-entered amount.
+
+    Raises:
+        ValueError: When the amount is not numeric or is zero/negative.
+    """
+    try:
+        amount = float(input("Enter the transaction amount: "))
+    except ValueError:
+        raise ValueError("Invalid amount. Amount must be numeric.")
+    
+    if amount <= 0:
+        raise ValueError("Invalid amount. Please enter a positive number.")
+    
+    return amount
 
 
 def chatbot():
