@@ -73,6 +73,24 @@ def get_amount() -> float:
         raise ValueError("Invalid amount. Please enter a positive number.")
     
     return amount
+def get_balance(account: int) -> str:
+    """
+    Retrieves the balance of a specified account.
+
+    Args:
+        account (int): The account number.
+
+    Returns:
+        str: A message containing the account number and its balance.
+
+    Raises:
+        ValueError: When the account number does not exist.
+    """
+    if account not in ACCOUNTS:
+        raise ValueError("Account number does not exist.")
+
+    balance = ACCOUNTS[account]["balance"]
+    return f"Your current balance for account {account} is ${balance:.2f}."
 
 
 def chatbot():

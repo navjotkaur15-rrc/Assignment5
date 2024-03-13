@@ -6,7 +6,7 @@ Usage:These tests verify the behavior and functionality of the chatbot functions
 """
 import unittest
 from unittest.mock import patch
-from src.chatbot import get_account, get_amount
+from src.chatbot import get_account, get_amount,get_balance
 
 
 class ChatbotTests(unittest.TestCase):
@@ -58,6 +58,23 @@ class ChatbotTests(unittest.TestCase):
             with self.assertRaises(ValueError) as context:
                 get_amount()
             self.assertEqual(str(context.exception), "Invalid amount. Please enter a positive number.")
-            
+     def test_get_balance_valid(self):
+        # Arrange
+        account_number = 123456
+
+        # Act
+        balance_message = get_balance(account_number)
+
+        # Assert
+        self.assertEqual(balance_message, 'Your current balance for account 123456 is $1000.00.')
+
+    def test_get_balance_nonexistent_account(self):
+        # Arrange
+        account_number = 112233
+
+        # Act and Assert
+        with self.assertRaises(ValueError) as context:
+            get_balance(account_number)
+        self.assertEqual(str(context.exception), "Account number does not exist.")        
 if __name__ == '__main__':
     unittest.main()
