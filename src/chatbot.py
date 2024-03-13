@@ -122,15 +122,11 @@ def user_selection() -> str:
 
 def chatbot():
     '''
-    The main program.  Uses the functionality of the functions:
-        get_account()
-        get_amount()
-        get_balance()
-        make_deposit()
-        user_selection()
+    The main program. Uses the functionality of the functions:
+    get_account(), get_amount(), get_balance(), make_deposit(), user_selection().
     '''
 
-    print("Welcome! I'm the PiXELL River Financial Chatbot!  Let's get chatting!")
+    print("Welcome! I'm the PiXELL River Financial Chatbot! Let's get chatting!")
 
     keep_going = True
     while keep_going:
@@ -138,49 +134,44 @@ def chatbot():
             # CALL THE user_selection FUNCTION HERE 
             # CAPTURING THE RESULTS IN A VARIABLE CALLED
             # selection:
-
             selection = user_selection()  
+
             if selection != "exit":
-                
                 # Account number validation.
                 valid_account = False
-                while valid_account == False:
+                while not valid_account:
                     try:
                         # CALL THE get_account FUNCTION HERE
                         # CAPTURING THE RESULTS IN A VARIABLE 
                         # CALLED account:
-
-
+                        account = get_account()
                         valid_account = True
                     except ValueError as e:
                         # Invalid account.
                         print(e)
+
                 if selection == "balance":
-                        # CALL THE get_balance FUNCTION HERE
-                        # PASSING THE account VARIABLE DEFINED 
-                        # ABOVE, AND PRINT THE RESULTS:
-                        pass
-
+                    # CALL THE get_balance FUNCTION HERE
+                    # PASSING THE account VARIABLE DEFINED 
+                    # ABOVE, AND PRINT THE RESULTS:
+                    print(get_balance(account))
                 else:
-
                     # Amount validation.
                     valid_amount = False
-                    while valid_amount == False:
+                    while not valid_amount:
                         try:
                             # CALL THE get_amount FUNCTION HERE
                             # AND CAPTURE THE RESULTS IN A VARIABLE 
                             # CALLED amount:
-
-
+                            amount = get_amount()
                             valid_amount = True
                         except ValueError as e:
                             # Invalid amount.
                             print(e)
-                # CALL THE make_deposit FUNCTION HERE PASSING THE 
-                # VARIABLES account AND amount DEFINED ABOVE AND 
-                # PRINT THE RESULTS:
-
-
+                    # CALL THE make_deposit FUNCTION HERE PASSING THE 
+                    # VARIABLES account AND amount DEFINED ABOVE AND 
+                    # PRINT THE RESULTS:
+                    print(make_deposit(account, amount))
             else:
                 # User selected 'exit'
                 keep_going = False
